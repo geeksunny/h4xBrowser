@@ -1,0 +1,23 @@
+This is a list of credits for this project.  This list will be cleaned up better in the future.
+- - - - -
+All content has been created by myself (Justin Swanson - www.faecbawks.com), except for the following...
+
+- Fonts -
+ - The 'UniBody' font was downloaded from this location, [http://www.underware.nl/fonts/unibody/preface/] and its license can be found at [http://www.underware.nl/download/unibody/pdf/UnibodyEULA.pdf]
+ - The 'DejaWeb' font was downloaded from this location, [http://www.anatoletype.net/fonts/dejarip] and its license can be found at [css/fonts/DejaWeb/AT Web-Eula.pdf]
+
+- Sounds -
+ - The "click" sound was downloaded from [http://www.javascriptkit.com/script/script2/soundlink.shtml].
+
+- JavaScript -
+ - jQuery [http://www.jquery.org/]
+
+- Images -
+ - "Silk" Icons
+  - Found at [http://www.famfamfam.com/lab/icons/silk/]
+  - License: Creative Commons Attribution 2.5 - [img/silk-icons-readme.txt]
+
+- Libraries -
+ - getID3()
+  - found at [http://www.getid3.org/]
+  - License: GNU GPL [lib/getid3/license.txt]
