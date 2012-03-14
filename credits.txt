@@ -10,7 +10,7 @@ All content has been created by myself (Justin Swanson - www.faecbawks.com), exc
  - The "click" sound was downloaded from [http://www.javascriptkit.com/script/script2/soundlink.shtml].
 
 - JavaScript -
- - jQuery [http://www.jquery.org/]
+ - jQuery [http://www.jquery.com/]
 
 - Images -
  - "Silk" Icons

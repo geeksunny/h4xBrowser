@@ -65,29 +65,6 @@ function closeFile()
 	document.getElementById("dirListing").style.display = "block";
 }
 
-/* OLD openFile()! Uses fancybox!
-function openFile(filename, mime)
-{
-	var sound = document.getElementById("click_sound");
-	sound.play();
-
-	$.fancybox({
-            'width': '90%',
-            'height': '90%',
-			'padding': 0,
-			'centerOnScroll': true,
-            'autoScale': true,
-			'onComplete': function () { $("body").css("overflow", "hidden"); $("html").css("overflow", "hidden"); },
-			'onClosed': function () { $("body").css("overflow", "auto"); $("html").css("overflow", "auto"); },
-			'scrolling': 'auto',
-            'transitionIn': 'fade',
-            'transitionOut': 'fade',
-            'type': 'iframe',
-			'href': 'fileinfo.php?f=' + filename + '&m=' + mime
-        });
-	//window.open(filename);
-}
-*/
 function updateRenderTimer(time)
 {
 	var timer = document.getElementById('renderTimer');
@@ -95,32 +72,17 @@ function updateRenderTimer(time)
 		timer.innerHTML = time;
 }
 
-function openOverlay()
-{
-	fbOverlay({
-            'width': '90%',
-            'height': '90%',
-			'padding': 5,
-            //'transitionIn': 'fade',
-            //'transitionOut': 'fade',
-            'type': 'ajax',
-            'url': 'test/ajaxContent.html'
-        });
-}
+/* -- jQuery code -- */
+$(function() {
+    // Allow proper floating of the header player, also accomodating for the player container header
+	var stickyHeaderTop = $('#fbHeader').offset().top;
 
-function moveHeader()
-{
-	var headerElem = document.getElementById('fbHeader');
-	var headerOffset = headerElem.offsetTop;
+	$(window).scroll(function(){
+		if( $(window).scrollTop() > stickyHeaderTop ) {
+			$('#fbHeader').addClass('stickTop');
+		} else {
+			$('#fbHeader').removeClass('stickTop');
+		}
+	});
 
-	var pov = window.pageYOffset;
-
-	if (pov > headerOffset)
-	{
-		headerElem.setAttribute("class","header stickTop");
-	}
-	else
-	{
-		headerElem.setAttribute("class","header");
-	}
-}
+});

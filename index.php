@@ -39,16 +39,14 @@ $timer = new utime();
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
 	<!-- <script src="js/libs/modernizr-2.0.6.min.js"></script> -->
 
-	<!-- Fancybox - www.fancybox.net -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-	<link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	<!-- jQuery - www.jquery.com -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 	<!-- Custom Javascript functions in the file below. -->
 	<script src="js/functions.js"></script>
 </head>
 
-<body onscroll="moveHeader();">
+<body>
 
   <div id="container">
     <header>
