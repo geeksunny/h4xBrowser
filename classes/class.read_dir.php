@@ -189,7 +189,6 @@ class dirReader
 				}
 				$stripe = !$stripe;
 			}
-			// TODO: Fix links for "../". Maybe use a substring method. (Example: "?f=rss/" from "?f=rss/test/". "index.php" from "?f=rss/")
 			if ($name == "..")
 			{
 				// Strip the trailing slash to determine if we will be going to the root path or not.

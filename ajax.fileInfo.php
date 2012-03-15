@@ -6,8 +6,8 @@ require_once("classes/class.fileInfo.php");
 // Import the global Settings
 require_once("config/settings.php");
 // GRABBING variables
-$file = $_GET['f'];
-$mime = $_GET['m'];
+$file = $_POST['f'];
+$mime = $_POST['m'];
 
 // Initialize the information panel. Uses variables from the global settings file.
 $info = new fileInfo($path, $url);

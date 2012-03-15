@@ -10,7 +10,7 @@ require_once("classes/class.read_dir.php");
 // - $omit_files, $path: declared in config/settings.php
 require_once("config/settings.php");
 // GRABBING variables
-$folder = (!strstr($_GET['f'],'../')) ? $_GET['f'] : "";
+$folder = (!strstr($_POST['f'],'../')) ? $_POST['f'] : "";
 
 // Initialize the directory scanner class
 $listing = new dirReader($getLastModified, $getFileSizes, $getMimeType, $showIcons);
@@ -22,5 +22,5 @@ $listing->openDirectory($url, $path, $folder, $omit_files);
 $listing->printDirectory();
 
 // Update render timer!
-echo '<span id="newTimer" style="display:none;">updateRenderTimer("'.$timer->getTime().'"); moveHeader();</span>'
+echo '<span id="newTimer" style="display:none;">updateRenderTimer("'.$timer->getTime().'");</span>';// moveHeader();
 ?>
