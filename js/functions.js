@@ -13,8 +13,10 @@ function navigate(folder)
 		url: "ajax.browseDirectory.php",
 		data: "f="+folder,
 		success: function(data) {
-			$("#dirListing").html(data);
-			eval($("#newTimer").html());
+			response = $.parseJSON(data);
+			$("#dirListing").html(response.data);
+			if (response.renderTimer != '')
+				$("#renderTimer").html(response.renderTimer);
 		},
 		error: function() {
 			alert("AJAX ERROR RESPONSE");	// TODO: MAKE THIS MORE USEFUL...
@@ -32,8 +34,9 @@ function openFile(filename, mime)
 		url: "ajax.fileInfo.php",
 		data: "f="+filename+'&m='+mime,
 		success: function(data) {
+			response = $.parseJSON(data);
 			$("#dirListing").css("display","none");
-			$("#fileInfo").html(data);
+			$("#fileInfo").html(response.data);
 			$("#fileInfo").css("display","block");
 		},
 		error: function() {
@@ -48,15 +51,8 @@ function closeFile()
 	sound.play();
 
 	$("#fileInfo").html("");
-	$("fileInfo").css("display","none");
-	$("dirListing").css("display","block");
-}
-
-function updateRenderTimer(time)
-{
-	var timer = document.getElementById('renderTimer');
-	if (timer != null)
-		timer.innerHTML = time;
+	$("#fileInfo").css("display","none");
+	$("#dirListing").css("display","block");
 }
 
 /* -- jQuery code -- */

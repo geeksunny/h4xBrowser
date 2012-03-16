@@ -57,6 +57,7 @@ $timer = new utime();
 		<div id="dirListing">
 			<?php
 			// Initial call of directory listing
+			$embedded = true;
 			include("ajax.browseDirectory.php");
 			?>
 		</div>
@@ -65,7 +66,6 @@ $timer = new utime();
     <footer>
 		<?php
 		// TODO: Add in a configuration option for page render time.
-		// TODO: Add in javascript to "ajax.browseDirectory.php" to update page render time after the directory has been displayed
 		// TODO: Perhaps change "Page rendered" to "Directory read/displayed"?
 		// page render time
 		echo "Page rendered in <span id='renderTimer'>".$timer->getTime()."</span> seconds.<br />";

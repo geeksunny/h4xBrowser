@@ -18,9 +18,14 @@ $listing = new dirReader($getLastModified, $getFileSizes, $getMimeType, $showIco
 // Open the directory and scan it (scanning is currently ran by default from within this function call.
 $listing->openDirectory($url, $path, $folder, $omit_files);
 
-// Display formatted table of directory contents
-$listing->printDirectory();
+// Retrieve formatted table of directory contents
+$data = $listing->printDirectory();
 
-// Update render timer!
-echo '<span id="newTimer" style="display:none;">updateRenderTimer("'.$timer->getTime().'");</span>';// moveHeader();
+// Retrieve updated render timer!
+$renderTimer = $timer->getTime();
+
+if (isset($embedded))	// If page is embedded, return the data.
+	echo $data;
+else	// Echo out the data to be returned, encoded as JSON.
+	exit(json_encode(array("data"=>$data,"renderTimer"=>$renderTimer)));
 ?>

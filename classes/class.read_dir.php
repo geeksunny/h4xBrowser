@@ -248,7 +248,7 @@ class dirReader
 
 		$output = $header . $folders . $files . $footer;
 
-		echo $output;
+		return $output;
 	}
 
 	// get_icon - returns the icon filename for the given file
