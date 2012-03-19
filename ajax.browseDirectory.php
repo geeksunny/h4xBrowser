@@ -19,13 +19,13 @@ $listing = new dirReader($getLastModified, $getFileSizes, $getMimeType, $showIco
 $listing->openDirectory($url, $path, $folder, $omit_files);
 
 // Retrieve formatted table of directory contents
-$data = $listing->printDirectory();
+$data = $listing->getListing();
+
+// Get the path to update the header with
+$path = $listing->getPath();
 
 // Retrieve updated render timer!
 $renderTimer = $timer->getTime();
 
-if (isset($embedded))	// If page is embedded, return the data.
-	echo $data;
-else	// Echo out the data to be returned, encoded as JSON.
-	exit(json_encode(array("data"=>$data,"renderTimer"=>$renderTimer)));
+exit(json_encode(array("data"=>$data,"path"=>$path,"renderTimer"=>$renderTimer)));
 ?>

@@ -14,7 +14,8 @@ function navigate(folder)
 		data: "f="+folder,
 		success: function(data) {
 			response = $.parseJSON(data);
-			$("#dirListing").html(response.data);
+			$("#fbBody").html(response.data);
+			$("#fbPath").html(response.path);
 			if (response.renderTimer != '')
 				$("#renderTimer").html(response.renderTimer);
 		},
@@ -36,7 +37,8 @@ function openFile(filename, mime)
 		success: function(data) {
 			response = $.parseJSON(data);
 			$("#dirListing").css("display","none");
-			$("#fileInfo").html(response.data);
+			$("#fiBody").html(response.data);
+			$("#fiPath").html(response.path);
 			$("#fileInfo").css("display","block");
 		},
 		error: function() {
@@ -50,7 +52,7 @@ function closeFile()
 	var sound = document.getElementById("click_sound");
 	sound.play();
 
-	$("#fileInfo").html("");
+	$("#fiBody").html("");
 	$("#fileInfo").css("display","none");
 	$("#dirListing").css("display","block");
 }

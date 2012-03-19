@@ -14,12 +14,12 @@ $info = new fileInfo($path, $url);
 // Set the file to be reported on.
 $info->setFile($file, $mime);
 
-// Generate the closeFile button.
-$data = '<div onclick="closeFile();" style="cursor:pointer;"><-- Go Back</div>';
-
 // Retrieve formatted table of directory contents
-$data .= $info->getOutput();
+$data = $info->getOutput();
+
+// Get the file path.
+$path = $url . $file;
 
 // Echo out the data to be returned, encoded as JSON.
-exit(json_encode(array("data"=>$data)));
+exit(json_encode(array("data"=>$data,"path"=>$path)));
 ?>

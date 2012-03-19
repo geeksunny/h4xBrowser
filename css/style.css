@@ -34,7 +34,7 @@ html { font-size: 100%; /*overflow-y: scroll;*/ -webkit-text-size-adjust: 100%; 
 
 body { margin: 0; font-size: 13px; line-height: 1.231; }
 
-body, button, input, select, textarea { font-family: sans-serif; color: #111; background-color: #83c441; }
+body, button, input, select, textarea { font-family: sans-serif; color: #111; background-color: #fff; /*background-color: #83c441;*/ }
 
 /* 
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -247,8 +247,7 @@ header #subheader {
 	font-family: "DejaWeb",sans-serif;
 	/*background-color: #efffe7;*/
 	color: #000;
-	/*padding: 12px;*/
-	padding: 0px;
+	padding-bottom: 75px;
 	background-color: #fff;
 }
 footer {
@@ -258,6 +257,10 @@ footer {
 
 	background-color: #83c441;
 	border-top:  solid 10px #111;
+
+	position: fixed;
+	width: 100%;
+	bottom: 0px;
 	}
 
 #main .header {

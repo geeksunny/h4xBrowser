@@ -1,5 +1,6 @@
 <?php
-require_once("config/settings.php");
+require_once("config/settings.php");		// Configuration settings.
+require_once("classes/class.read_dir.php");	// For getting the directory listing.
 // Page render timer
 require_once("classes/class.utime.php");
 $timer = new utime();
@@ -57,11 +58,37 @@ $timer = new utime();
 		<div id="dirListing">
 			<?php
 			// Initial call of directory listing
-			$embedded = true;
-			include("ajax.browseDirectory.php");
+			// - $omit_files, $path: declared in config/settings.php
+			// GRABBING variables
+			$folder = (!strstr($_POST['f'],'../')) ? $_POST['f'] : "";
+
+			// Initialize the directory scanner class
+			$listing = new dirReader($getLastModified, $getFileSizes, $getMimeType, $showIcons);
+
+			// Open the directory and scan it (scanning is currently ran by default from within this function call.
+			$listing->openDirectory($url, $path, $folder, $omit_files);
+
+			// Retrieve the header data.
+			$header = $listing->getHeader();
+			// Retrieve formatted table of directory contents
+			$data = $listing->getListing();
 			?>
+			<div class="header" id="fbHeader">
+				<?=$header ?>
+			</div>
+			<div id="fbBody">
+				<?=$data ?>
+			</div>
 		</div>
-		<div id="fileInfo" style="display:none;"></div>
+		<div id="fileInfo" style="display:none;">
+			<div class="header" id="fiHeader">
+				<div class="title pad clearfix">
+					<span onclick="closeFile();" style="cursor:pointer;"><img src="img/icons/arrow_left.png" /> Go Back</span>
+					<span id="fiPath" style="float:right;"></span>
+				</div>
+			</div>
+			<div id="fiBody"></div>
+		</div>
     </div>
     <footer>
 		<?php

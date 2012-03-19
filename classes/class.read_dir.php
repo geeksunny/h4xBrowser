@@ -141,23 +141,16 @@ class dirReader
 			// TODO: When sorting options is implemented, sort the file list here. Determine if sorting should be case-sensitive (LINUX-"Awxyz,abc") or not (Windows-"abc,Awxyz")
 		}
 
-	// Debug var_dump!
-	//var_dump($contents); die;
-	return $contents;
+		// Debug var_dump!
+		//var_dump($contents); die;
+		return $contents;
 	}
 
-	public function printDirectory($zebra = true)
+	public function getHeader()
 	{
-		// Initialize Zebra Striping Process if set to true.
-		if ($zebra)
-			$stripe = false;
-		// initialize variables, for cleanliness' sake.
-		$folders = ""; $files = "";
-
-		$header = '<div class="header" id="fbHeader">
-				<div class="title pad clearfix">
+		$header = '<div class="title pad clearfix">
 					Browsing directory...
-					<span style="float:right;">'.$this->url.$this->folder/*$this->dir*/.'</span>
+					<span id="fbPath" style="float:right;">'.$this->getPath().'</span>
 				</div>
 				<div class="pad clearfix">';
 		// Generate subheaders for output table
@@ -168,8 +161,24 @@ class dirReader
 			$header .= '<div class="mime fl_right">Type</div>';
 		if ($this->getFileSizes)
 			$header .= '<div class="size fl_right">Size</div>';
-		$header .= '</div></div>
-		<table id="file_listing">
+		$header .= '</div>';
+
+		return $header;
+	}
+
+	public function getPath()
+	{
+		return $this->url.$this->folder/*$this->dir*/;
+	}
+	public function getListing($zebra = true)
+	{
+		// Initialize Zebra Striping Process if set to true.
+		if ($zebra)
+			$stripe = false;
+		// initialize variables, for cleanliness' sake.
+		$folders = ""; $files = "";
+
+		$header = '<table id="file_listing">
 			<tbody>';
 
 		// Folders... this will be streamlined later when "seperation options" are implemented
