@@ -20,6 +20,8 @@ function navigate(folder)
 			$("#fbPath").html(response.path);
 			if (response.renderTimer != '')
 				$("#renderTimer").html(response.renderTimer);
+			// Updating the browser history...
+			history.pushState({ path: this.path }, '', url_base+folder);
 		},
 		error: function() {
 			alert("AJAX ERROR RESPONSE");	// TODO: MAKE THIS MORE USEFUL...
@@ -73,4 +75,9 @@ $(function() {
 		}
 	});
 
+	$(window).bind('popstate', function() {
+		target = location.origin + location.pathname;
+		destination = target.replace(url_base,"");
+		navigate(destination);
+	})
 });
