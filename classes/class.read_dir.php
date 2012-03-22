@@ -2,10 +2,11 @@
 
 class dirReader
 {
-	private $url; // Used for generating links to files.
+	private $url;			// Used for generating links to files.
+	private $img_src = "";	// The url to be used for absolutely linking images if required.
 	// The following two variables are used to determine if we are in the root of the default path.
-	private $path; // The "default path"
-	private $folder; // The "folder" within the "default path"
+	private $path;			// The "default path"
+	private $folder;		// The "folder" within the "default path"
 
 	private $dir; // the directory to scan.
 	private $omit_list; // an array containing a list of files to omit from the directory listing
@@ -51,6 +52,11 @@ class dirReader
 			$this->columns += 1;
 		if ($getMimeType)
 			$this->columns += 1;
+	}
+
+	public function setImgSrc($new_url)
+	{
+		$this->img_src = $new_url;
 	}
 
 	public function openDirectory($url, $path, $folder, $omit_list=array())
@@ -182,75 +188,81 @@ class dirReader
 			<tbody>';
 
 		// Folders... this will be streamlined later when "seperation options" are implemented
-		foreach ($this->contents['folders'] as $name => $folder)
+		if (!is_null($this->contents['folders']))
 		{
-			// Zebra Striping
-			// TODO: consolidate zebra striping to one process after the files / folders are integrated into a single data array and a single data printing loop
-			if (isset($stripe))
+			foreach ($this->contents['folders'] as $name => $folder)
 			{
-				if ($stripe)
+				// Zebra Striping
+				// TODO: consolidate zebra striping to one process after the files / folders are integrated into a single data array and a single data printing loop
+				if (isset($stripe))
 				{
-					$class = 'class="zebra"';
+					if ($stripe)
+					{
+						$class = 'class="zebra"';
+					}
+					else
+					{
+						$class = "";
+					}
+					$stripe = !$stripe;
+				}
+				if ($name == "..")
+				{
+					// Strip the trailing slash to determine if we will be going to the root path or not.
+					$path = rtrim($this->folder,'/');
+					// If we find another slash, step up one directory
+					if ($slash = strrpos($path, '/'))
+						//echo substr($path,0,$slash);
+						$link = substr($path,0,$slash).'/';//$link = '<a href="index.php?f='.substr($path,0,$slash).'/">'.$name.'</a>';
+					else
+						$link = "";//$link = '<a href="index.php">'.$name.'</a>';
 				}
 				else
-				{
-					$class = "";
-				}
-				$stripe = !$stripe;
+					$link = $this->folder.$name.'/';//$link = '<a href="index.php?f='.$this->folder.$name.'/">'.$name.'</a>';
+				$folders .= '<tr '.$class.' onclick="navigate(\''.$link.'\');"><td>';
+				if ($this->showIcons)
+					$folders .= '<img src="'.$this->img_src.$folder['icon'].'" /> ';
+				$folders .= $name.'</td>';
+				if ($this->getFileSizes)
+					$folders .= '<td class="size">'.$folder['size'].'</td>';
+				if ($this->getMimeType)
+					$folders .= '<td class="mime">'.$folder['mime'].'</td>';
+				if ($this->getLastModified)
+					$folders .= '<td class="date">'.$folder['modified'].'</td></tr>';
+				$folders .= '</tr>'."\n";
 			}
-			if ($name == "..")
-			{
-				// Strip the trailing slash to determine if we will be going to the root path or not.
-				$path = rtrim($this->folder,'/');
-				// If we find another slash, step up one directory
-				if ($slash = strrpos($path, '/'))
-					//echo substr($path,0,$slash);
-					$link = substr($path,0,$slash).'/';//$link = '<a href="index.php?f='.substr($path,0,$slash).'/">'.$name.'</a>';
-				else
-					$link = "";//$link = '<a href="index.php">'.$name.'</a>';
-			}
-			else
-				$link = $this->folder.$name.'/';//$link = '<a href="index.php?f='.$this->folder.$name.'/">'.$name.'</a>';
-			$folders .= '<tr '.$class.' onclick="navigate(\''.$link.'\');"><td>';
-			if ($this->showIcons)
-				$folders .= '<img src="'.$folder['icon'].'" /> ';
-			$folders .= $name.'</td>';
-			if ($this->getFileSizes)
-				$folders .= '<td class="size">'.$folder['size'].'</td>';
-			if ($this->getMimeType)
-				$folders .= '<td class="mime">'.$folder['mime'].'</td>';
-			if ($this->getLastModified)
-				$folders .= '<td class="date">'.$folder['modified'].'</td></tr>';
-			$folders .= '</tr>'."\n";
 		}
 		// Files... this will be streamlined later when "seperation options" are implemented
-		foreach ($this->contents['files'] as $name => $file)
+		if (!is_null($this->contents['files']))
 		{
-			// Zebra Striping
-			if (isset($stripe))
+			foreach ($this->contents['files'] as $name => $file)
 			{
-				if ($stripe)
+				// Zebra Striping
+				if (isset($stripe))
 				{
-					$class = 'class="zebra"';
+					if ($stripe)
+					{
+						$class = 'class="zebra"';
+					}
+					else
+					{
+						$class = "";
+					}
+					$stripe = !$stripe;
 				}
-				else
-				{
-					$class = "";
-				}
-				$stripe = !$stripe;
-			}
 
-			$files .= '<tr '.$class.' onClick="openFile(\''.$this->folder.$name.'\', \''.$file['mime'].'\');"><td>';
-			if ($this->showIcons)
-				$files .= '<img src="'.$file['icon'].'" /> ';
-			$files .= $name.'</td>';
-			if ($this->getFileSizes)
-				$files .= '<td class="size">'.$file['size'].'</td>';
-			if ($this->getMimeType)
-				$files .= '<td class="mime">'.$file['mime'].'</td>';
-			if ($this->getLastModified)
-				$files .= '<td class="date">'.$file['modified'].'</td></tr>';
-			$files .= '</tr>'."\n";
+				$files .= '<tr '.$class.' onClick="openFile(\''.$this->folder.$name.'\', \''.$file['mime'].'\');"><td>';
+				if ($this->showIcons)
+					$files .= '<img src="'.$this->img_src.$file['icon'].'" /> ';
+				$files .= $name.'</td>';
+				if ($this->getFileSizes)
+					$files .= '<td class="size">'.$file['size'].'</td>';
+				if ($this->getMimeType)
+					$files .= '<td class="mime">'.$file['mime'].'</td>';
+				if ($this->getLastModified)
+					$files .= '<td class="date">'.$file['modified'].'</td></tr>';
+				$files .= '</tr>'."\n";
+			}
 		}
 
 		$footer = '</tbody></table>';

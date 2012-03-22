@@ -3,6 +3,7 @@
  **/
 // TODO: Convert ajax code to be json-based
 // TODO: Investigate on how easy it would be to make navigation show up in the history. In other words, hitting "Back" on the browser would go up one directory.
+// Variable 'url_base' is expected to be set globally on the index.php page that refrences this file! This is used to make the ajax files absolutely linked.
 function navigate(folder)
 {
 	var sound = document.getElementById("click_sound");
@@ -10,9 +11,10 @@ function navigate(folder)
 
 	$.ajax({
 		type: "POST",
-		url: "ajax.browseDirectory.php",
+		url: url_base+"ajax.browseDirectory.php",
 		data: "f="+folder,
 		success: function(data) {
+			console.log(data);	//debug
 			response = $.parseJSON(data);
 			$("#fbBody").html(response.data);
 			$("#fbPath").html(response.path);
@@ -32,9 +34,10 @@ function openFile(filename, mime)
 
 	$.ajax({
 		type: "POST",
-		url: "ajax.fileInfo.php",
+		url: url_base+"ajax.fileInfo.php",
 		data: "f="+filename+'&m='+mime,
 		success: function(data) {
+			//console.log(data);	//debug
 			response = $.parseJSON(data);
 			$("#dirListing").css("display","none");
 			$("#fiBody").html(response.data);

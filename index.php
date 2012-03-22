@@ -1,9 +1,13 @@
 <?php
-require_once("config/settings.php");		// Configuration settings.
-require_once("classes/class.read_dir.php");	// For getting the directory listing.
+require_once("config/settings.php");			// Configuration settings.
+require_once("classes/class.read_dir.php");		// For getting the directory listing.
 // Page render timer
 require_once("classes/class.utime.php");
 $timer = new utime();
+// Absolute URLs.
+require_once("classes/class.server_path.php");	// For generating absolute URLs.
+$srvpath = new server_path();
+define("URL", $srvpath->get_server_path(1,false,true,true));
 ?>
 
 <!doctype html>
@@ -30,7 +34,7 @@ $timer = new utime();
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
   <!-- CSS: implied media=all -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="<?=URL?>css/style.css">
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -44,7 +48,8 @@ $timer = new utime();
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 	<!-- Custom Javascript functions in the file below. -->
-	<script src="js/functions.js"></script>
+	<script type="text/javascript">var url_base = "<?=URL?>"; // Used to ensure AJAX calls inside 'js/functions.js' will work!</script>
+	<script src="<?=URL?>js/functions.js"></script>
 </head>
 
 <body>
@@ -60,10 +65,13 @@ $timer = new utime();
 			// Initial call of directory listing
 			// - $omit_files, $path: declared in config/settings.php
 			// GRABBING variables
-			$folder = (!strstr($_POST['f'],'../')) ? $_POST['f'] : "";
+			$folder = (!strstr($_REQUEST['f'],'../')) ? $_REQUEST['f'] : "";
 
 			// Initialize the directory scanner class
 			$listing = new dirReader($getLastModified, $getFileSizes, $getMimeType, $showIcons);
+
+			// Setting the img_src variable for absolutely linked images.
+			$listing->setImgSrc(URL);
 
 			// Open the directory and scan it (scanning is currently ran by default from within this function call.
 			$listing->openDirectory($url, $path, $folder, $omit_files);
@@ -83,7 +91,7 @@ $timer = new utime();
 		<div id="fileInfo" style="display:none;">
 			<div class="header" id="fiHeader">
 				<div class="title pad clearfix">
-					<span onclick="closeFile();" style="cursor:pointer;"><img src="img/icons/arrow_left.png" /> Go Back</span>
+					<span onclick="closeFile();" style="cursor:pointer;"><img src="<?=URL?>img/icons/arrow_left.png" /> Go Back</span>
 					<span id="fiPath" style="float:right;"></span>
 				</div>
 			</div>
