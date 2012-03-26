@@ -279,6 +279,11 @@ footer {
 	padding: 3px;
 }
 
+#main .header a { color: #ecf6e2; text-decoration: none;}
+#main .header a:visited { color: #ecf6e2; text-decoration: none; }
+#main .header a:hover { color: #ecf6e2; text-decoration: underline; }
+#main .header a:focus { outline: thin dotted; }
+
 #file_listing {
 	width: 100%;
 }
@@ -288,7 +293,7 @@ footer {
 }
 #file_listing tbody tr:hover {
 	background-color: #dbead4;
-	cursor: pointer;
+	/*cursor: pointer;*/
 	/*font-style: italic;*/
 }
 #file_listing td {
@@ -309,6 +314,11 @@ footer {
 #main .header .name {
 	width: 35%;
 }
+
+#file_listing a { color: #111; text-decoration: none;}
+#file_listing a:visited { color: #111; text-decoration: none; }
+#file_listing a:hover { color: #111; text-decoration: underline; }
+#file_listing a:focus { outline: thin dotted; }
 
 .fl_right {
 	float: right;

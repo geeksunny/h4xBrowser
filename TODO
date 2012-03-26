@@ -1,5 +1,3 @@
 Write up a proper README with Markdown formatting.
 
 Clean up and finish the file-details viewer.
-
-Break the #fbHeader element out of the class.read_dir.php file and move it into index.php.  Use the JSON return values to dynamically change the content of the element, and apply its use to the fileInfo panel.

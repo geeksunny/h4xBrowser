@@ -62,41 +62,23 @@ define("URL", $srvpath->get_server_path(1,false,true,true));
     <div id="main" role="main">
 		<div id="dirListing">
 			<?php
-			// Initial call of directory listing
-			// - $omit_files, $path: declared in config/settings.php
-			// GRABBING variables
-			$folder = (!strstr($_REQUEST['f'],'../')) ? $_REQUEST['f'] : "";
-
 			// Initialize the directory scanner class
 			$listing = new dirReader($getLastModified, $getFileSizes, $getMimeType, $showIcons);
 
 			// Setting the img_src variable for absolutely linked images.
 			$listing->setImgSrc(URL);
 
-			// Open the directory and scan it (scanning is currently ran by default from within this function call.
-			$listing->openDirectory($url, $path, $folder, $omit_files);
-
 			// Retrieve the header data.
 			$header = $listing->getHeader();
-			// Retrieve formatted table of directory contents
-			$data = $listing->getListing();
 			?>
 			<div class="header" id="fbHeader">
 				<?=$header ?>
 			</div>
 			<div id="fbBody">
-				<?=$data ?>
+				<? //TODO: Add some sort of "If you still see this message, something went wrong" message here. ?>
 			</div>
 		</div>
-		<div id="fileInfo" style="display:none;">
-			<div class="header" id="fiHeader">
-				<div class="title pad clearfix">
-					<span onclick="closeFile();" style="cursor:pointer;"><img src="<?=URL?>img/icons/arrow_left.png" /> Go Back</span>
-					<span id="fiPath" style="float:right;"></span>
-				</div>
-			</div>
-			<div id="fiBody"></div>
-		</div>
+		<script type="text/javascript">$(document).ready(function() { onPageLoad(); });</script>
     </div>
     <footer>
 		<?php
@@ -110,8 +92,8 @@ define("URL", $srvpath->get_server_path(1,false,true,true));
   </div> <!--! end of #container -->
 
 	<audio id="click_sound" preload="auto">
-		<source src="audio/click.mp3"></source>
-		<source src="audio/click.ogg"></source>
+		<source src="<?=URL?>audio/click.mp3"></source>
+		<source src="<?=URL?>audio/click.ogg"></source>
 	</audio>
   <!-- JavaScript at the bottom for fast page loading -->
 

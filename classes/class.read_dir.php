@@ -155,10 +155,11 @@ class dirReader
 	public function getHeader()
 	{
 		$header = '<div class="title pad clearfix">
-					Browsing directory...
+					<span id="labelBrowsing" style="display: none; float:left;">Browsing directory...</span>
+					<span id="labelBack" style="display: none; float:left;"><a href="" id="backLink" class="slider"><img src="'.$this->img_src.'img/icons/arrow_left.png" /> Go Back</a></span>
 					<span id="fbPath" style="float:right;">'.$this->getPath().'</span>
 				</div>
-				<div class="pad clearfix">';
+				<div class="pad clearfix" id="tableHeader">';
 		// Generate subheaders for output table
 		$header .= 'Name';
 		if ($this->getLastModified)
@@ -219,10 +220,10 @@ class dirReader
 				}
 				else
 					$link = $this->folder.$name.'/';//$link = '<a href="index.php?f='.$this->folder.$name.'/">'.$name.'</a>';
-				$folders .= '<tr '.$class.' onclick="navigate(\''.$link.'\');"><td>';
+				$folders .= '<tr '.$class.'><td>';
 				if ($this->showIcons)
 					$folders .= '<img src="'.$this->img_src.$folder['icon'].'" /> ';
-				$folders .= $name.'</td>';
+				$folders .= '<a href="'.$this->img_src.$link.'" class="slider">'.$name.'</a></td>';
 				if ($this->getFileSizes)
 					$folders .= '<td class="size">'.$folder['size'].'</td>';
 				if ($this->getMimeType)
@@ -251,10 +252,10 @@ class dirReader
 					$stripe = !$stripe;
 				}
 
-				$files .= '<tr '.$class.' onClick="openFile(\''.$this->folder.$name.'\', \''.$file['mime'].'\');"><td>';
+				$files .= '<tr '.$class.'><td>';
 				if ($this->showIcons)
 					$files .= '<img src="'.$this->img_src.$file['icon'].'" /> ';
-				$files .= $name.'</td>';
+				$files .= '<a href="'.$this->img_src.$this->folder.$name.'&m='.$file['mime'].'" class="slider">'.$name.'</a></td>';
 				if ($this->getFileSizes)
 					$files .= '<td class="size">'.$file['size'].'</td>';
 				if ($this->getMimeType)
