@@ -72,5 +72,5 @@ elseif (is_file($target))
 	exit(json_encode(array("data"=>$data,"path"=>$path,"type"=>"file","parent"=>$parent,"renderTimer"=>$renderTimer)));
 }
 else
-	echo "NEITHER!!!";
+	echo "Debug:\n".var_dump($_REQUEST);
 ?>

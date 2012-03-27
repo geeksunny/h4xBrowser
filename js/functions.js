@@ -5,7 +5,7 @@
 // Variable 'url_base' is expected to be set globally on the index.php page that refrences this file! This is used to make the ajax files absolutely linked. // TODO: Figure out a better way to communicate this value between index.php and functions.js... I believe this is why the site doesn't work on mobile browsers.
 function onPageLoad()	// used on initial page load.
 {
-	path = location.origin + location.pathname;
+	path = location.protocol + "//" + location.host + location.pathname;
 	target = path.replace(window.url_base,"");
 
 	$.ajax({
@@ -135,7 +135,7 @@ $(document).ready(function() {
 		if (!e.originalEvent.state)
 			return;	// Workaround for popstate on load
 
-		path = location.origin + location.pathname;
+		path = location.protocol + "//" + location.host + location.pathname;
 		target = path.replace(window.url_base,"");
 
 		var sound = document.getElementById("click_sound");
