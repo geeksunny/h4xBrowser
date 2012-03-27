@@ -6,11 +6,11 @@
 function onPageLoad()	// used on initial page load.
 {
 	path = location.origin + location.pathname;
-	target = path.replace(url_base,"");
+	target = path.replace(window.url_base,"");
 
 	$.ajax({
 		type: "POST",
-		url: url_base+"ajax.browse.php",
+		url: window.url_base+"ajax.browse.php",
 		data: "f="+target,
 		success: function(data) {
 			//console.log(data);	//debug
@@ -40,7 +40,7 @@ function onPageLoad()	// used on initial page load.
 				if (response.renderTimer != '')
 					$("#renderTimer").html(response.renderTimer);
 				// Updating the browser history...
-				history.pushState({ path: this.path }, '', url_base+target);
+				history.pushState({ path: this.path }, '', window.url_base+target);
 			} catch (e) {
 				alert(data);		//debug	// Clean this up with another solution later?
 				//console.log(e);	//debug
@@ -71,14 +71,14 @@ $(document).ready(function() {
 	// Event code for clicking a link in the directory listing.
 	$("a.slider").live('click',function(e){
 		e.preventDefault();
-		target = $(this).attr('href').replace(url_base,'');	// Grab the variable
+		target = $(this).attr('href').replace(window.url_base,'');	// Grab the variable
 
 		var sound = document.getElementById("click_sound");
 		sound.play();
 
 		$.ajax({
 			type: "POST",
-			url: url_base+"ajax.browse.php",
+			url: window.url_base+"ajax.browse.php",
 			data: "f="+target,
 			success: function(data) {
 				//console.log(data);	//debug
@@ -118,7 +118,7 @@ $(document).ready(function() {
 					if (response.renderTimer != '')
 						$("#renderTimer").html(response.renderTimer);
 					// Updating the browser history...
-					history.pushState({ path: this.path }, '', url_base+target);
+					history.pushState({ path: this.path }, '', window.url_base+target);
 				} catch (e) {
 					alert(data);		//debug	// Clean this up with another solution later?
 					//console.log(e);	//debug
@@ -136,14 +136,14 @@ $(document).ready(function() {
 			return;	// Workaround for popstate on load
 
 		path = location.origin + location.pathname;
-		target = path.replace(url_base,"");
+		target = path.replace(window.url_base,"");
 
 		var sound = document.getElementById("click_sound");
 		sound.play();
 
 		$.ajax({
 			type: "POST",
-			url: url_base+"ajax.browse.php",
+			url: window.url_base+"ajax.browse.php",
 			data: "f="+target,
 			success: function(data) {
 				//console.log(data);	//debug

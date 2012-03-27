@@ -48,7 +48,7 @@ define("URL", $srvpath->get_server_path(1,false,true,true));
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 	<!-- Custom Javascript functions in the file below. -->
-	<script type="text/javascript">var url_base = "<?=URL?>"; // Used to ensure AJAX calls inside 'js/functions.js' will work!</script>
+	<script type="text/javascript">window.url_base = "<?=URL?>"; // Used to ensure AJAX calls inside 'js/functions.js' will work!</script>
 	<script src="<?=URL?>js/functions.js"></script>
 </head>
 
