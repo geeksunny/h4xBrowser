@@ -27,12 +27,13 @@ function onPageLoad()	// used on initial page load.
 					if (response.type == "directory")
 					{
 						// Display the column labels and the "browsing directory" label.
-						$("#tableHeader").fadeIn(150);
+						//$("#tableHeader").fadeIn(150);
 						$("#labelBrowsing").fadeIn(150);
 					}
 					else	// Assuming the .type value returned was "file".
 					{
 						// Set the href value of the back link and fade it into view
+						$("#tableHeader").hide();
 						$("#backLink").attr("href",response.parent);
 						$("#labelBack").fadeIn(150);
 					}
