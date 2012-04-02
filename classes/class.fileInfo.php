@@ -110,10 +110,10 @@ class fileInfo
 		//$rows = count($this->fileinfo);
 
 		// File Preview!
-		$output = '<div id="preview">'.$this->filepreview.'</div>';
+		$output = '<div id="file_info"><div id="preview">'.$this->filepreview.'</div>';
 
 		// TODO: Make this table "responsive"... utilize the examples in the "Dropbox/Code/PhpStorm/ResponsiveTables" directory!
-		$output .= '<div id="info"><table width="100%" height="100%">';
+		$output .= '<div id="info"><table>';
 
 		// File Info!...
 		$output .= '<tr><td colspan="2" align="center"><h2><strong>File Information</strong></h2></td></tr>';
@@ -121,13 +121,13 @@ class fileInfo
 		// TODO: aside from file preview/thumbnail, most of this report will be generated with the $this->fileinfo array variable.
 		foreach ($this->fileinfo as $field_label => $field_value)
 		{
-			$output .= '<tr><td><strong>'.$field_label.'</strong></td><td>'.$field_value.'</td></tr>';
+			$output .= '<tr><td class="field_label">'.$field_label.'</td><td class="field_value">'.$field_value.'</td></tr>';
 		}
 
 		$output .= '</table></div>';
 
 		// Clear the float!
-		$output .= '<div style="clear: both;"></div>';
+		$output .= '<div style="clear: both;"></div></div>';
 
 		// Return the data
 		return $output;

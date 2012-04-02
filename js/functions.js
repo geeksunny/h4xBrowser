@@ -191,4 +191,20 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	// File Preview image stuff
+	$("#preview img").live("click", function() {
+		//console.log("img: "+$(this).width());			//debug
+		//console.log("window: "+$(window).width());	//debug
+
+		if ($(this).width() == $(window).width())
+		{
+			$(this).css("width","auto");
+		}
+		else
+		{
+			$(this).css("width","100%");
+		}
+	});
+
 });

@@ -320,6 +320,32 @@ footer {
 #file_listing a:hover { color: #111; text-decoration: underline; }
 #file_listing a:focus { outline: thin dotted; }
 
+#fbBody #file_info {
+	text-align: center;
+}
+#preview {
+	width: 100%;
+}
+/*#preview img {
+	width: 100%;
+}*/
+#info {
+	float: none;
+}
+#info table {
+	margin: auto;
+}
+#info table td {
+	padding: 3px;
+}
+#info .field_label {
+	text-align: right;
+	font-weight: bold;
+}
+#info .field_value {
+	text-align: left;
+}
+
 .fl_right {
 	float: right;
 }
@@ -337,6 +363,7 @@ footer {
 	top: 0px;
 	width: 100%;
 }
+
 
 
 /* ==|== non-semantic helper classes ========================================
@@ -371,48 +398,6 @@ footer {
    These override the primary ('mobile first') styles
    Modify as content requires.
    ========================================================================== */
-#preview {
-	width: 100%;
-}
-#preview img {
-	width: 100%;
-}
-#info {
-	width: 100%;
-	float: none;
-}
-/*
-@media only screen
-	and (min-device-width : 320px)
-	and (max-device-width : 480px) {  /* Style adjustments for viewports 480px and over go here */
-/*	#preview {
-		width: 100%;
-	}
-	#preview img {
-		width: 100%;
-	}
-	#info {
-		width: 100%;
-		float: none;
-	}
-}
-
-@media only screen and (min-width: 768px) {
-  /* Style adjustments for viewports 768px and over go here */
-/*	#preview {
-		width: 45%;
-		float: left;
-	}
-	#preview img {
-		width: 100%;
-	}
-	#info {
-		width: 50%;
-		float: right;
-	}
-}*/
-
-
 
 /* ==|== print styles =======================================================
    Print styles.
