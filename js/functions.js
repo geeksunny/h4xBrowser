@@ -16,9 +16,18 @@ function onPageLoad()	// used on initial page load.
 			//console.log(data);	//debug
 			try {
 				response = $.parseJSON(data);
-				$("#fbBody").fadeOut(150,function(){	// Fade the table out of view.
-					$("#fbBody").html(response.data);	// Replaces the data once the table has faded out.
-					$("#fbBody").fadeIn(150);			// Fade the table back in to view.
+				$("#fbBody").fadeOut(150,function(){		// Fade the table out of view.
+					$("#fbBody").html(response.data);		// Replaces the data once the table has faded out.
+					$("#fbBody").fadeIn(150,function(){		// Fade the table back in to view.
+						ni = new Image();
+						ni.src = $("#preview img").attr('src');
+						ni.onload = function() {
+							if (ni.width >= $(window).width())
+							{
+								$("#preview img").css("width","100%");
+							}
+						};
+					});
 				});
 				$("#fbPath").fadeOut(150,function(){	// Fade the path-text out of view.
 					$("#fbPath").html(response.path);	// Replace the old path-text with the new path-text.
@@ -61,10 +70,8 @@ $(document).ready(function() {
 	$(window).scroll(function(){
 		if( $(window).scrollTop() > stickyHeaderTop ) {
 			$('#fbHeader').addClass('stickTop');
-			//$('#fiHeader').addClass('stickTop');
 		} else {
 			$('#fbHeader').removeClass('stickTop');
-			//$('#fiHeader').removeClass('stickTop');
 		}
 	});
 
@@ -85,9 +92,18 @@ $(document).ready(function() {
 				//console.log(data);	//debug
 				try {
 					response = $.parseJSON(data);
-					$("#fbBody").fadeOut(150,function(){	// Fade the table out of view.
-						$("#fbBody").html(response.data);	// Replaces the data once the table has faded out.
-						$("#fbBody").fadeIn(150);			// Fade the table back in to view.
+					$("#fbBody").fadeOut(150,function(){		// Fade the table out of view.
+						$("#fbBody").html(response.data);		// Replaces the data once the table has faded out.
+						$("#fbBody").fadeIn(150,function(){		// Fade the table back in to view.
+							ni = new Image();
+							ni.src = $("#preview img").attr('src');
+							ni.onload = function() {
+								if (ni.width >= $(window).width())
+								{
+									$("#preview img").css("width","100%");
+								}
+							};
+						});
 					});
 					$("#fbPath").fadeOut(150,function(){	// Fade the path-text out of view.
 						$("#fbPath").html(response.path);	// Replace the old path-text with the new path-text.
@@ -150,9 +166,18 @@ $(document).ready(function() {
 				//console.log(data);	//debug
 				try {
 					response = $.parseJSON(data);
-					$("#fbBody").fadeOut(150,function(){	// Fade the table out of view.
-						$("#fbBody").html(response.data);	// Replaces the data once the table has faded out.
-						$("#fbBody").fadeIn(150);			// Fade the table back in to view.
+					$("#fbBody").fadeOut(150,function(){		// Fade the table out of view.
+						$("#fbBody").html(response.data);		// Replaces the data once the table has faded out.
+						$("#fbBody").fadeIn(150,function(){		// Fade the table back in to view.
+							ni = new Image();
+							ni.src = $("#preview img").attr('src');
+							ni.onload = function() {
+								if (ni.width >= $(window).width())
+								{
+									$("#preview img").css("width","100%");
+								}
+							};
+						});
 					});
 					$("#fbPath").fadeOut(150,function(){	// Fade the path-text out of view.
 						$("#fbPath").html(response.path);	// Replace the old path-text with the new path-text.
@@ -194,6 +219,7 @@ $(document).ready(function() {
 	});
 
 	// File Preview image stuff
+	// - Resize image to fit on click
 	$("#preview img").live("click", function() {
 		//console.log("img: "+$(this).width());			//debug
 		//console.log("window: "+$(window).width());	//debug

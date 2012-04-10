@@ -326,9 +326,9 @@ footer {
 #preview {
 	width: 100%;
 }
-/*#preview img {
-	width: 100%;
-}*/
+#preview img {
+	cursor: pointer;
+}
 #info {
 	float: none;
 }
